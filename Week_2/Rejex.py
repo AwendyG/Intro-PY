@@ -18,7 +18,8 @@ print(matched.group())
 
 #re.findall() n- Find all the matches
 
-numbers = re.findall(r"\d", text)#words = re.findall(r"\w+", text)
+numbers = re.findall(r"\d", text)
+words = re.findall(r"\w+", text)
 strictly_words = re.findall(r"[A-Za-z]+", text)
 print(numbers)
 print(words)
@@ -53,6 +54,10 @@ pattern = r"[a.b]"
 match = re.findall(pattern,text)
 print(match)
 
+#+ #matches one or more
+
+#? #matches zero or one
+
 #matches 0 or more repetitions of the preceding character
 text = "aa, ab, aaab, acb, dab"
 pattern = r"[a*b]"
@@ -83,3 +88,64 @@ print(re.findall(pattern, text))
 text = "pi, beta, omega, alpha"
 pattern = r"[abc]$"
 print(re.findall(pattern, text))
+
+#word boundary \b - position sequence - it looks for non word characters
+text = "fan fantastic fandom fanciful infant fanbase"
+
+pattern = r"\bfan\b"
+
+match = re.findall(pattern, text)
+
+print(match)
+
+#\B - not a word boundary, looks for words within words, or word characters.
+
+text = "fan fantastic fandom fanciful infant fanbase"
+
+pattern = r"\Bfan\B"
+
+match = re.findall(pattern, text)
+
+print(match)
+
+#find all words that start with py
+
+text = "We are learning python and python is fun pyooo pywi"
+pattern = r"\bpy\w*"
+match = re.findall(pattern, text)
+print(match)
+
+#find all words that have letters o or e in them.
+
+text = "Hello, world! I love python"
+
+pattern = r"\w*[oe]\w*\b"
+
+match = re.findall(pattern,text)
+
+print(match)
+
+#find all 4 digit numbers
+
+text = "2020 was a hard year but I got a new phone number 072084992762."
+
+pattern = r"\d{4}"
+
+match = re.findall(pattern, text)
+
+print(match)
+
+#Grouping
+text = "phone number is (254) 456-7890"
+pattern = r"(\(\d{3}\))\s\d{3}-(\d{4})"
+match = re.search(pattern,text)
+
+#print(match.group(0))
+#print(match.group(1))
+#print(match.group(2))
+
+text = "My email is user@example.com or contact@domain.com and daisy.joy@gmail.com or dear-sir@gmail.com even s#care@gmail.co.ke"
+#pattern = r"\b\w+[@]\w+\.[a-z]+"
+pattern = r"\b[a-zA-Z0-9.-#]+[@][a-zA-Z0-9]+\.[a-z.]"
+match = re.findall(pattern,text)
+print(match)
